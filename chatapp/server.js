@@ -13,6 +13,7 @@ const {
   userLeave,
   getRoomUsers,
 } = require("./utils/users");
+const { apiCallPOST, stringToFormData } = require("./utils/sentimentAPI");
 
 const app = express();
 const server = http.createServer(app);
@@ -21,7 +22,7 @@ const io = socketio(server);
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));
 
-const botName = "ChatCord Bot";
+const botName = "ChattyG Bot";
 
 (async () => {
   pubClient = createClient({ url: "redis://127.0.0.1:6379" });
@@ -32,14 +33,14 @@ const botName = "ChatCord Bot";
 
 // Run when client connects
 io.on("connection", (socket) => {
-  console.log(io.of("/").adapter);
+  // console.log(io.of("/").adapter);
   socket.on("joinRoom", ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
 
     socket.join(user.room);
 
     // Welcome current user
-    socket.emit("message", formatMessage(botName, "Welcome to ChatCord!"));
+    socket.emit("message", formatMessage(botName, "Welcome to ChattyG!"));
 
     // Broadcast when a user connects
     socket.broadcast
@@ -57,10 +58,21 @@ io.on("connection", (socket) => {
   });
 
   // Listen for chatMessage
-  socket.on("chatMessage", (msg) => {
+  socket.on("chatMessage", async (msg) => {
     const user = getCurrentUser(socket.id);
+    let sentiment;
 
-    io.to(user.room).emit("message", formatMessage(user.username, msg));
+    try {
+      sentiment = await apiCallPOST(
+        process.env.SENTIMENT_API_URL,
+        stringToFormData(msg)
+      );
+
+    } catch (error) {
+      console.error("Error getting message sentiment:", error);
+    }
+
+    io.to(user.room).emit("message", formatMessage(user.username, msg, sentiment.prediction));
   });
 
   // Runs when client disconnects

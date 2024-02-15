@@ -47,6 +47,12 @@ a {
 	overflow: hidden;
 }
 
+.chat-face {
+	width: 19px;
+	height: 19px;
+	margin-left: 5px;
+}
+
 .chat-header {
 	background: var(--dark-color-a);
 	color: #fff;

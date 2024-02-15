@@ -1,3 +1,3 @@
 def predict(model, text):
-    predictions = model.predict([text])
-    return predictions[0]
+    predictions = model.predict_proba([text])
+    return predictions[0][1]

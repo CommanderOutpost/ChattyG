@@ -58,9 +58,34 @@ function outputMessage(message) {
   p.innerText = message.username;
   p.innerHTML += `<span>${message.time}</span>`;
   div.appendChild(p);
+
   const para = document.createElement('p');
+
+  const happyFace = document.createElement('i');
+  happyFace.classList.add('far');
+  happyFace.classList.add('fa-smile');
+  happyFace.classList.add('chat-face');
+
+  const unhappyFace = document.createElement('i');
+  unhappyFace.classList.add('fas');
+  unhappyFace.classList.add('fa-frown');
+  unhappyFace.classList.add('chat-face');
+  
+  const neutralFace = document.createElement('i');
+  neutralFace.classList.add('far');
+  neutralFace.classList.add('fa-meh');
+  neutralFace.classList.add('chat-face');
+
   para.classList.add('text');
   para.innerText = message.text;
+  console.log(message.sentiment, happyFace, unhappyFace)
+  if (parseFloat(message.sentiment) > 0.7) {
+    para.appendChild(happyFace);
+  } else if (parseFloat(message.sentiment) < 0.4) {
+    para.appendChild(unhappyFace);
+  } else {
+    para.appendChild(neutralFace);
+  }
   div.appendChild(para);
   document.querySelector('.chat-messages').appendChild(div);
 }
