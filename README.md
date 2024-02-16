@@ -12,7 +12,7 @@ To use ChattyG, follow these steps:
 
 1. Clone repo
 ```
-git clone url
+git clone https://github.com/CommanderOutpost/ChattyG.git
 ```
 
 2. Install dependencies
