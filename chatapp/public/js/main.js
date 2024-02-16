@@ -21,7 +21,6 @@ socket.on('roomUsers', ({ room, users }) => {
 
 // Message from server
 socket.on('message', (message) => {
-  console.log(message);
   outputMessage(message);
 
   // Scroll down
@@ -78,7 +77,6 @@ function outputMessage(message) {
 
   para.classList.add('text');
   para.innerText = message.text;
-  console.log(message.sentiment, happyFace, unhappyFace)
   if (parseFloat(message.sentiment) > 0.7) {
     para.appendChild(happyFace);
   } else if (parseFloat(message.sentiment) < 0.4) {
