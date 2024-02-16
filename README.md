@@ -27,8 +27,8 @@ echo "SENTIMENT_API_URL=http://127.0.0.1:8000/sentiment/" >> chatapp/.env
 
 3. Start servers
 ```
-python3 sentiment_analysis_app/manage.py runserver
-npm --prefix chatapp/ start
+nohup python3 sentiment_analysis_app/manage.py runserver &
+nohup npm --prefix chatapp/ start &
 ```
 
 3. Go to localhost:3000 in browser

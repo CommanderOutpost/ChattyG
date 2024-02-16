@@ -1,3 +1,4 @@
 chatapp/node_modules/
 chatapp/.DS_Store
 chatapp/.env
+nohup.out
