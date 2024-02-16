@@ -6,9 +6,7 @@ ChattyG is a real-time chat application with sentiment analysis. It is built usi
 
 To use ChattyG, follow these steps:
 
-1. Install the required dependencies by running the following command:
-
-# How to use
+### MacOS and Linux
 
 1. Clone repo
 ```
