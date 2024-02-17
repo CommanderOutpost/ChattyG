@@ -1,4 +1,4 @@
 pandas
 joblib
 django
-dotenv
+python-dotenv
