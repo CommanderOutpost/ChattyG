@@ -2,4 +2,5 @@ chatapp/node_modules/
 chatapp/package-lock.json
 chatapp/.DS_Store
 chatapp/.env
+.env
 nohup.out
