@@ -28,13 +28,9 @@ echo "SENTIMENT_API_URL=http://127.0.0.1:8000/sentiment/" >> chatapp/.env
 ```
 
 4. Start servers
-- Django Server:
 ```
-python3 sentiment_analysis_app/manage.py runserver
+npm --prefix chatapp/ run all 
 ```
-- Express Server:
-```
-npm --prefix chatapp/ start
-```
+
 
 5. Go to localhost:3000 in browser
