@@ -27,7 +27,7 @@ echo "DJANGO_ALLOWED_HOSTS=< ALLOWED_HOSTS_LIST > >> .env
 echo "SENTIMENT_API_URL=http://127.0.0.1:8000/sentiment/" >> chatapp/.env
 ```
 
-3. Start servers
+4. Start servers
 - Django Server:
 ```
 python3 sentiment_analysis_app/manage.py runserver
@@ -37,4 +37,4 @@ python3 sentiment_analysis_app/manage.py runserver
 npm --prefix chatapp/ start
 ```
 
-3. Go to localhost:3000 in browser
+5. Go to localhost:3000 in browser
