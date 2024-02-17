@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const botName = "ChattyG Bot";
 
 (async () => {
-  pubClient = createClient({ url: "redis://127.0.0.1:6379" });
+  pubClient = createClient({ url: process.env.REDIS_URL_EXTERNAL || "redis://127.0.0.1:6379" });
   await pubClient.connect();
   subClient = pubClient.duplicate();
   io.adapter(createAdapter(pubClient, subClient));
