@@ -2,4 +2,4 @@ pandas
 joblib
 django
 python-dotenv
-sklearn
+scikit-learn
