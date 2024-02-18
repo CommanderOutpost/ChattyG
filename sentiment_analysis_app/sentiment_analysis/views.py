@@ -10,7 +10,6 @@ from sentiment_analysis import utils
 
 @csrf_exempt
 def sentiment_analysis_view(request):
-    print(request.get_host())
     dir = os.path.dirname(os.path.abspath(__file__))
     if request.method == 'POST':
         text = request.POST.get('text')

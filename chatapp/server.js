@@ -72,6 +72,13 @@ io.on("connection", (socket) => {
       console.error("Error getting message sentiment:", error);
     }
 
+
+    if (!user) {
+      msg = "undefined"
+      io.emit("message", formatMessage("System", msg, sentiment.prediction));
+      return;
+    }
+
     io.to(user.room).emit("message", formatMessage(user.username, msg, sentiment.prediction));
   });
 

@@ -21,6 +21,12 @@ socket.on('roomUsers', ({ room, users }) => {
 
 // Message from server
 socket.on('message', (message) => {
+  if (message.text === 'undefined') {
+    // Change location to home
+    location.href = '/';
+    return;
+  }
+
   outputMessage(message);
 
   // Scroll down
