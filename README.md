@@ -24,14 +24,15 @@ npm --prefix chatapp/ install
 
 3. Set up .env file
 ```
-echo "SECRET_KEY=< SECRET_KEYS >" >> .env
+echo "SECRET_KEY=< SECRET_KEY >" >> .env
 echo "DJANGO_ALLOWED_HOSTS=< ALLOWED_HOSTS_LIST > >> .env
 echo "SENTIMENT_API_URL=http://127.0.0.1:8000/sentiment/" >> chatapp/.env
 ```
+Example of ALLOWED_HOSTS_LIST, `0.0.0.0,chattyg.onrender.com` with no space.
 
 4. Start servers
 ```
-npm --prefix chatapp/ run all 
+npm --prefix chatapp/ run all
 ```
 
 
