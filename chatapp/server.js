@@ -2,7 +2,7 @@ const path = require("path");
 const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
-const formatMessage = require("./utils/messages");
+const { formatMessage, generateUniqueId } = require("./utils/messages");
 const createAdapter = require("@socket.io/redis-adapter").createAdapter;
 const redis = require("redis");
 require("dotenv").config();
@@ -61,6 +61,15 @@ io.on("connection", (socket) => {
   socket.on("chatMessage", async (msg) => {
     const user = getCurrentUser(socket.id);
     let sentiment;
+    const messageId = generateUniqueId();
+
+    if (!user) {
+      msg = "undefined"
+      io.emit("message", formatMessage("System", msg, null, null));
+      return;
+    }
+
+    io.to(user.room).emit("message", formatMessage(user.username, msg, null, messageId));
 
     try {
       sentiment = await apiCallPOST(
@@ -72,14 +81,7 @@ io.on("connection", (socket) => {
       console.error("Error getting message sentiment:", error);
     }
 
-
-    if (!user) {
-      msg = "undefined"
-      io.emit("message", formatMessage("System", msg, sentiment.prediction));
-      return;
-    }
-
-    io.to(user.room).emit("message", formatMessage(user.username, msg, sentiment.prediction));
+    io.to(user.room).emit("sentiment", formatMessage(null, null, sentiment.prediction, messageId));
   });
 
   // Runs when client disconnects

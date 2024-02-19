@@ -33,6 +33,10 @@ socket.on('message', (message) => {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+socket.on('sentiment', (message) => {
+  outputSentiment(message);
+})
+
 // Message submit
 chatForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -66,32 +70,34 @@ function outputMessage(message) {
 
   const para = document.createElement('p');
 
-  const happyFace = document.createElement('i');
-  happyFace.classList.add('far');
-  happyFace.classList.add('fa-smile');
-  happyFace.classList.add('chat-face');
-
-  const unhappyFace = document.createElement('i');
-  unhappyFace.classList.add('fas');
-  unhappyFace.classList.add('fa-frown');
-  unhappyFace.classList.add('chat-face');
-  
-  const neutralFace = document.createElement('i');
-  neutralFace.classList.add('far');
-  neutralFace.classList.add('fa-meh');
-  neutralFace.classList.add('chat-face');
-
+  const sentimentIcon = document.createElement('i');
   para.classList.add('text');
   para.innerText = message.text;
-  if (parseFloat(message.sentiment) > 0.7) {
-    para.appendChild(happyFace);
-  } else if (parseFloat(message.sentiment) < 0.4) {
-    para.appendChild(unhappyFace);
-  } else {
-    para.appendChild(neutralFace);
-  }
+  para.appendChild(sentimentIcon);
+  para.id = message.messageId;
   div.appendChild(para);
   document.querySelector('.chat-messages').appendChild(div);
+}
+
+
+function outputSentiment(message) {
+
+  const textMessage = document.getElementById(message.messageId);
+  const sentimentIcon = textMessage.lastChild;
+  
+  if (parseFloat(message.sentiment) > 0.7) {
+    sentimentIcon.classList.add('far');
+    sentimentIcon.classList.add('fa-smile');
+    sentimentIcon.classList.add('chat-face');
+  } else if (parseFloat(message.sentiment) < 0.4) {
+    sentimentIcon.classList.add('fas');
+    sentimentIcon.classList.add('fa-frown');
+    sentimentIcon.classList.add('chat-face');
+  } else {
+    sentimentIcon.classList.add('far');
+    sentimentIcon.classList.add('fa-meh');
+    sentimentIcon.classList.add('chat-face');  
+  }
 }
 
 // Add room name to DOM
