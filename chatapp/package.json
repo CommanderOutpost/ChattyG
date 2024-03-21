@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "chatapp": "node server",
-    "app": "python3 ../sentiment_analysis_app/manage.py runserver 0.0.0.0:5000",
+    "app": "python3 ../sentiment_analysis_app/manage.py runserver 127.0.0.1:8000",
     "all": "npm-run-all --parallel app chatapp",
     "dev": "nodemon server"
   },
